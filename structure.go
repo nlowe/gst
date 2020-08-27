@@ -63,6 +63,16 @@ func (s *Structure) GetInt(name string) (int, error) {
     return int(out), nil
 }
 
+func (s *Structure) GetInt64(name string) (int64, error) {
+    var out C.gint64
+
+    if C.FALSE == C.gst_structure_get_int64(s.C, C.CString(name), &out) {
+        return 0, errNoSuchField("int64", name)
+    }
+
+    return int64(out), nil
+}
+
 func (s *Structure) GetUint(name string) (uint, error) {
     var out C.guint
 
